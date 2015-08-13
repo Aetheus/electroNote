@@ -1,5 +1,8 @@
 {
-    "name"      : "electroNote",
-    "version"   : "0.0.1",
-    "main"      : "main.js"
+  "name": "electroNote",
+  "version": "0.0.1",
+  "main": "main.js",
+  "dependencies": {
+    "jquery": "^2.1.4"
+  }
 }

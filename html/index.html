@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hello World!</title>
+    </head>
+
+    <body>
+        <div id="header">
+            <a href="" class="draggable button_round floatLeft">Drag Me</a>
+            <a href="" id="close-button" class="button_round button_round_red floatLeft">x</a>
+        </div>
+
+        <div id="content">
+            <textarea id="textbox"> </textarea>
+        </div>
+
+        <div id="footer">
+            Footer
+        </div>
+    </body>
+
+    <!--For custom stylesheet-->
+    <link rel="stylesheet" type="test/css" href="styles/custom-styles.css" />
+
+
+    <script type="text/javascript">
+        //acquire jQuery
+        window.$ = window.jQuery = require('jquery');
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(function() { $('body').hide().show(); });
+
+            var $closeButton = require("../lib/closeButton")
+                                    .init(jQuery,"#close-button");
+
+
+
+
+        });
+    </script>
+</html>
