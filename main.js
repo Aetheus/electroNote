@@ -1,5 +1,6 @@
 var app = require('app');  // Module to control application life.
 var ipc = require("ipc"); //for renderer-to-app communications
+var processArgs = require("./lib/processArgs");
 
 var BrowserWindow = require('browser-window');  // Module to create native browser window.
 
@@ -9,6 +10,7 @@ require('crash-reporter').start();
 
 // Keep a global reference of the window object, if you don't, the window willbe closed automatically when the JavaScript object is GCed.
 var mainWindow = null;
+var mainWindowSettings = {width: 300, height: 400, "always-on-top": true, frame:"false"};
 
 //when a close-request is sent from the renderer (i.e: the close button is clicked), attempt to close the mainWindow
 ipc.on("async-close-request", function(event,arg){
@@ -30,10 +32,14 @@ app.on('window-all-closed', function() {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 app.on('ready', function() {
+    process.argv.forEach(function (val, index, array) {
+        if (typeof(processArgs[val]) !== "undefined"){
+            processArgs[val](mainWindowSettings);
+        }
+    });
+
     // Create the browser window.
-    //var browserWindowSettings = {width: 300, height: 400, "always-on-top": true, "frame": false};
-    var browserWindowSettings = {width: 300, height: 400, "always-on-top": true};
-    mainWindow = new BrowserWindow(browserWindowSettings);
+    mainWindow = new BrowserWindow(mainWindowSettings);
 
     // and load the index.html of the app.
     mainWindow.loadUrl('file://' + __dirname + '/html/index.html');
